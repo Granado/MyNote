@@ -7,16 +7,15 @@ Listener都可以拦截到ServletContext，ServletContext是个全局唯一的�
 
 到目前最新的Servlet标准，Listener分为3类： ServletContext，HttpSession和ServletRequest相关的Listener。
 
- ### 1.ServletContext相关的Listener
+###  1.ServletContext相关的Listener
  
  该类Listener有 ServletContextListener、ServletContextAttributeListener。
  
-  #### ServletContextListener接口方法有：
+#### ServletContextListener接口方法有：
   - `contextInitialized(ServletContextEvent e)`  
   - `contextDestroyed(ServletContextEvent e)`
-
- #### ServletContextAttributeListener接口方法有:
-
+ 
+#### ServletContextAttributeListener接口方法有:
  - `attributeAdded(ServletContextAttributeEvent e)`
  - `attributeRemoved(ServletContextAttributeEvent e)`
  - `attributeReplaced(ServletContextAttributeEvent e)`
