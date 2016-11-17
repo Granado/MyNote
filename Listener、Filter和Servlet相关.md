@@ -61,7 +61,8 @@ Listener都可以拦截到ServletContext，ServletContext是个全局唯一的�
 #### ServletRequestListener的接口方法有：
  - `void requestDestroyed(ServletRequestEvent e) `
  - `void requestInitialized(ServletRequestEvent e) `
-通过这个Listener可以监听到每个由该应用处理的每个请求，并拦截下ServletRequest。
+ 
+    通过这个Listener可以监听到每个由该应用处理的每个请求，并拦截下ServletRequest。
 
 #### ServletRequestAttributeListener的接口方法有:
 -  `void attributeAdded(ServletRequestAttributeEvent e) `
@@ -71,17 +72,27 @@ Listener都可以拦截到ServletContext，ServletContext是个全局唯一的�
 ### 4.各种Listener的调用时机
 当配置多个Listener时，Listener的初始化是按照在Web.xml中声明的顺序初始化的。当有多个相同Listener时，由于他们监听同一个事件，因此得有一个调用顺序。在Servlet3.0前的标准，多个Listener监听到同一个事件时，是随机调用多个Listener中的响应方法的。在Servlet3.0及之后的标准中，这个顺序是按照Web.xml中配置的顺序来调用的，当然这是大多数Listener的调用的方式，HttpSessionListener的 sessionDestroy 方法是与Web.xml中配置顺序相反的调用。
 
+ServletContextListener 在Web应用启动时就会调用其 contextInitialized 方法。
+
+ServletRequestListener 在Web应用接收到请求时创建或者销毁 Request 时响应 （它比Filter的范围更广，因为它会监听所有 URL 的请求，Filter 只会响应它所对应的 URL 请求）。
+
+HttpSessionListener 在Web应用创建或者销毁一个 Session 时响应。
+
+ServletContextAttributeListener 、HttpSessionAttributeListener、ServletRequestAttributeListener 都是在监听各自所监听的对象在其存放的键值对，当键值对发生增删改的时候响应。
+
 ## 二、Filter
  Filter是起过滤作用的，比Servlet先调用（调用doFilter方法）。一个应用中可能会有多个Filter，每个Filter按照Web.xml中配置的顺序链式处理，即 Filter1--->Filter2--->Filter3...，这样处理下去，但每个Filter需要再doFilter中调用filterChain.doFilter(request, response)让下个Filter处理。
 
  Filter在web.xml中配置的参数有：
  - `<init-param></init-param>`
  - `<async-supported>(Servlet 3.0后支持的是否开启异步处理设置)`
- 在Filter中的init方法中可以获取到 InitParameter、ServletContext 。
+ 
+     在Filter中的init方法中可以获取到 InitParameter、ServletContext 。
 
  Filter的接口方法有：
  - `void init(FilterConfig fConfig)`
  - `void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)`
  - `void destroy()`
- 其生命周期是 Filter实现类的构造方法---> init() ---> destroy()。doFilter方法会在每次服务器接收到请求时调用（如果Filter有映射到请求地址）。
+
+   其生命周期是 Filter实现类的构造方法---> init() ---> destroy()。doFilter方法会在每次服务器接收到请求时调用（如果Filter有映射到请求地址）。
 
