@@ -78,6 +78,10 @@ ServletRequestListener 在Web应用接收到请求时创建或者销毁 Request 
 
 HttpSessionListener 在Web应用创建或者销毁一个 Session 时响应。
 
+HttpSessionActivateListener 在Web应用持久化Session时的前后分别调用 sessionWillPassivate、sessionDidActivate。
+
+HttpSessionBindingListener 在 session.setAttribute 和 session.removeAttribute 的时候响应。
+
 ServletContextAttributeListener 、HttpSessionAttributeListener、ServletRequestAttributeListener 都是在监听各自所监听的对象在其存放的键值对，当键值对发生增删改的时候响应。
 
 ## 二、Filter
@@ -86,7 +90,11 @@ ServletContextAttributeListener 、HttpSessionAttributeListener、ServletRequest
  Filter在web.xml中配置的参数有：
  - `<init-param></init-param>`
  - `<async-supported>(Servlet 3.0后支持的是否开启异步处理设置)`
- 
+
+ 指定过滤类型（如果不配置，则默认为request）：
+ - `<dispatcher>REQUEST</dispatcher> （过滤所有客户端请求，不会处理内部跳转）` 
+ - `<dispatcher>FORWARD</dispatcher> （过滤内部跳转 不包括include方式跳转）`
+ - `<dispatcher>INCLUDE</dispatcher>  （只过滤include内部跳转。Include也是跳转的一种，但是A调用B后，还会回来调用A）`
      在Filter中的init方法中可以获取到 InitParameter、ServletContext 。
 
  Filter的接口方法有：
