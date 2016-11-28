@@ -103,7 +103,7 @@ ServletContextAttributeListener 、HttpSessionAttributeListener、ServletRequest
  - `void destroy()`
  其生命周期是 Filter实现类的构造方法---> init() ---> destroy()。doFilter方法会在每次服务器接收到请求时调用（如果Filter有映射到请求地址）。
    
- ## 三、Servlet
+## 三、Servlet
  Servlet是具体的服务，完成具体的请求响应服务。
  
  Servlet在web.xml中的配置参数主要有：
