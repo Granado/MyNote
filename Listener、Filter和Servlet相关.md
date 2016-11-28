@@ -85,7 +85,7 @@ HttpSessionBindingListener 在 session.setAttribute 和 session.removeAttribute 
 ServletContextAttributeListener 、HttpSessionAttributeListener、ServletRequestAttributeListener 都是在监听各自所监听的对象在其存放的键值对，当键值对发生增删改的时候响应。
 
 ## 二、Filter
- Filter是起过滤作用的，比Servlet先调用（调用doFilter方法）。一个应用中可能会有多个Filter，每个Filter按照Web.xml中配置的顺序链式处理，即 Filter1--->Filter2--->Filter3...，这样处理下去，但每个Filter需要再doFilter中调用filterChain.doFilter(request, response)让下个Filter处理。
+ Filter是起过滤作用的，比Servlet先调用（调用doFilter方法）。一个应用中可能会有多个Filter，每个Filter按照Web.xml中配置的顺序链式处理，即 Filter1--->Filter2--->Filter3...，这样处理下去，但每个Filter需要在doFilter中调用filterChain.doFilter(request, response)让下个Filter处理，filterChain是传入doFilter的一个参数。
 
  Filter在web.xml中配置的参数有：
  - `<init-param></init-param>`
@@ -101,6 +101,29 @@ ServletContextAttributeListener 、HttpSessionAttributeListener、ServletRequest
  - `void init(FilterConfig fConfig)`
  - `void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)`
  - `void destroy()`
+ 其生命周期是 Filter实现类的构造方法---> init() ---> destroy()。doFilter方法会在每次服务器接收到请求时调用（如果Filter有映射到请求地址）。
+   
+ ## 三、Servlet
+ Servlet是具体的服务，完成具体的请求响应服务。
+ 
+ Servlet在web.xml中的配置参数主要有：
+ - `<load-on-startup>1</load-on-startup>`
+ - `<init-param></init-param>`
+ - `<async-supported>(Servlet 3.0后支持的是否开启异步处理设置)`
+    在Servlet中的init方法中可以获取到 InitParameter、ServletContext 。
+	load-on-startup 这个参数用来控制Servlet的启动顺序，用大于0的数字时，会跟随容器启动，多个Servlet时，数字越小越早启动。用小于0的数字时，不会随容器启动，而是用到该Servlet时再启动。
+	
+Servlet的接口方法有：
+- `public void init(ServletConfig config)`
+- `public void destroy()`
+- `doGet doPost doPut doDelete doHead doOptions doTrace`
+其生命周期是 Servlet的实现类的构造方法---> init() ---> destroy()。每次请求，Servlet响应时，会调用各个 doXXX方法
 
-   其生命周期是 Filter实现类的构造方法---> init() ---> destroy()。doFilter方法会在每次服务器接收到请求时调用（如果Filter有映射到请求地址）。
+## 四、Listener、Filter和Servlet的启动顺序
+主要顺序是 所有的Listener启动并调用 init 方法后，再启动 Filter 并调用其 init 方法，再启动 Servlet 并调用其 init 方法。 多个Listener、Filter 或者 Servlet时，按各自的配置顺序启动，再按主要顺序启动。
 
+
+
+
+
+最后，写这篇最主要的感悟是，Servlet是一套Java开发Web服务的一套标准，不依赖具体Web容器。但各个容器实现有差异，细节需要了解。
