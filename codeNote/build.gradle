@@ -1,0 +1,10 @@
+group 'com.granado'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+allprojects {
+  dependencies {
+
+  }
+}
