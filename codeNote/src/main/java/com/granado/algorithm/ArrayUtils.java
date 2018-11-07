@@ -1,3 +1,5 @@
+package com.granado.algorithm;
+
 import java.util.Random;
 
 public class ArrayUtils {

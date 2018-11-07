@@ -1,3 +1,5 @@
+package com.granado.algorithm;
+
 public class AfterClass {
 
   public static void chapter13(char[] chars) {

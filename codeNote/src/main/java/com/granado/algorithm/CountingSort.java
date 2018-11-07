@@ -1,3 +1,5 @@
+package com.granado.algorithm;
+
 public class CountingSort {
 
   /*
