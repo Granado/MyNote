@@ -1,2 +1,4 @@
 rootProject.name = 'codeNote'
+include "groovy-learnning"
+include "algorithm-learnning"
 
