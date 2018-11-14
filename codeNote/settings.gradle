@@ -1,4 +1,5 @@
 rootProject.name = 'codeNote'
 include "groovy-learning"
 include "algorithm-learning"
+include 'gradle-learning'
 

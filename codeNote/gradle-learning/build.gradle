@@ -1,0 +1,15 @@
+plugins {
+    id 'groovy'
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile localGroovy() // Groovy支持(本地)
+    compile gradleApi() // GradleAPI支持
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

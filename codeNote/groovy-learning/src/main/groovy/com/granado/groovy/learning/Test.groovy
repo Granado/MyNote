@@ -1,20 +1,12 @@
 package com.granado.groovy.learning
 
-class test {
-
-  public test() {
-    println 'i was initialized'
+class MyDelegate {
+  def func = {
+    println('hello')
   }
-
-  def echo = { it ->
-    println "i tell you: ${it}"
-  }
-
 }
-
-println 'test'
-
-def t = new test()
-t.echo '哈哈哈哈'
-t.echo('哈哈哈哈')
-t.echo.call("Are you kidding me?")
+def c = {
+  func()
+}
+c.delegate = new MyDelegate()
+c.call()
