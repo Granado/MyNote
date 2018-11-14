@@ -1,4 +1,13 @@
+import java.util.function.BiConsumer
+
 allprojects {
   dependencies {
   }
 }
+
+getChildProjects().forEach(new BiConsumer() {
+  @Override
+  void accept(k, v) {
+    println(k + " = " + v)
+  }
+})

@@ -1,3 +1,11 @@
+/*
+* Gradle执行步骤:
+*   1、根据 settings.gradle 文件构建 Project 对象，一个子模块一个 build.gradle 文件，对应一个 Project 对象
+*   2、执行每个 build.gradle, 每个 build.gradle 都会被代理到对应的 Project 对象上执行。调用该 Project 的方法。
+*      简单理解就是 build.gradle 就是一个大的 Closure, 然后将 closure.delegate = project。该步主要用于配置 Project 对象。
+*   3、构建。
+* */
+
 plugins {
     id 'groovy'
     id 'java'
@@ -13,3 +21,6 @@ dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+println("the project's root is " + getRootProject())
+println("the project directory is " + getRootDir())
