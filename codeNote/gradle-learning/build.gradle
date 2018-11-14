@@ -1,26 +1,35 @@
 /*
 * Gradle执行步骤:
-*   1、根据 settings.gradle 文件构建 Project 对象，一个子模块一个 build.gradle 文件，对应一个 Project 对象
+*   1、根据 settings.gradle 构建 Setting 对象，构建 Project 对象，一个子模块一个 build.gradle 文件，对应一个 Project 对象
 *   2、执行每个 build.gradle, 每个 build.gradle 都会被代理到对应的 Project 对象上执行。调用该 Project 的方法。
 *      简单理解就是 build.gradle 就是一个大的 Closure, 然后将 closure.delegate = project。该步主要用于配置 Project 对象。
 *   3、构建。
+*
+*   Setting Project Task ConfigurationContainer Gradle
 * */
 
 plugins {
-    id 'groovy'
-    id 'java'
+  id 'groovy'
+  id 'java'
 }
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-    compile localGroovy() // Groovy支持(本地)
-    compile gradleApi() // GradleAPI支持
-    compile 'org.codehaus.groovy:groovy-all:2.3.11'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+  compile localGroovy() // Groovy支持(本地)
+  compile gradleApi() // GradleAPI支持
+  compile 'org.codehaus.groovy:groovy-all:2.3.11'
+  testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
 println("the project's root is " + getRootProject())
 println("the project directory is " + getRootDir())
+getRootProject().getAllTasks(true).forEach {
+  project, tasks ->
+    tasks.forEach {
+      eachTask ->
+        println("project: " + project + ", task: " + eachTask)
+    }
+}
