@@ -1,4 +1,4 @@
-# Gradle Learnning
+# Gradle Learning
 [Gradle开发快速入门——DSL语法原理与常用API介绍](http://www.paincker.com/gradle-develop-basics)
 
 [Gradle DSL 官方文档](https://docs.gradle.org/current/dsl/)
