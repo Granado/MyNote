@@ -6,6 +6,11 @@
 *   3、构建。
 *
 *   Setting Project Task ConfigurationContainer Gradle
+*
+*   include: 直接包含子模块，该子模块含有 build.gradle
+*   includeFlat: 包含一个目录（容器），该目录放入其他的子模块，每个模块含有 build.gradle，子模块还需要再用 include 引入。
+*   includeBuild: 包含一个项目，该项目有完整的构建周期（即可以当做一个独立运行的完整的项目），该项目含有 settings.gradle
+*   和 build.gradle。该构建也叫复合构建
 * */
 
 plugins {
