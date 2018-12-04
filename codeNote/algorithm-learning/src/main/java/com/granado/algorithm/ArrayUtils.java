@@ -1,46 +1,28 @@
 package com.granado.algorithm;
 
+import java.lang.reflect.Array;
 import java.util.Random;
 
 public class ArrayUtils {
 
-  public static <T> String printArray(T[] array) {
-    StringBuilder msg = new StringBuilder();
-    for (int i = 0; i < array.length; i++) {
+  // 静态绑定能区分，动态绑定会找重载方法或多态方法的参数的共同父类传入
+  public static String printArray(Object obj) {
 
-      msg.append(array[i]);
-      if (i != array.length - 1) {
-        msg.append(", ");
+    if (obj.getClass().isArray()) {
+      StringBuilder msg = new StringBuilder();
+      int length = Array.getLength(obj);
+      for (int i = 0; i < length; i++) {
+
+        msg.append(Array.get(obj, i));
+        if (i != length - 1) {
+          msg.append(", ");
+        }
       }
+
+      return msg.toString();
+    } else {
+      return obj.toString();
     }
-
-    return msg.toString();
-  }
-
-  public static String printArray(int[] array) {
-    StringBuilder msg = new StringBuilder();
-    for (int i = 0; i < array.length; i++) {
-
-      msg.append(array[i]);
-      if (i != array.length - 1) {
-        msg.append(", ");
-      }
-    }
-
-    return msg.toString();
-  }
-
-  public static String printArray(char[] array) {
-    StringBuilder msg = new StringBuilder();
-    for (int i = 0; i < array.length; i++) {
-
-      msg.append(array[i]);
-      if (i != array.length - 1) {
-        msg.append(", ");
-      }
-    }
-
-    return msg.toString();
   }
 
   public static int[] generateRandomArray(int n) {
@@ -62,32 +44,14 @@ public class ArrayUtils {
     return array;
   }
 
-  public static void swap(int[] array, int a, int b) {
+  public static void swap(Object obj, int a, int b) {
 
-    if (a < array.length && b < array.length) {
-
-      int t = array[a];
-      array[a] = array[b];
-      array[b] = t;
-    }
-  }
-
-  public static void swap(char[] array, int a, int b) {
-
-    if (a < array.length && b < array.length) {
-
-      char t = array[a];
-      array[a] = array[b];
-      array[b] = t;
-    }
-  }
-
-  public static <T> void swap(T[] array, int a, int b) {
-
-    if (a < array.length && b < array.length) {
-      T t = array[a];
-      array[a] = array[b];
-      array[b] = t;
+    if (obj.getClass().isArray()) {
+        Object t = Array.get(obj, a);
+        Array.set(obj, a, Array.get(obj, b));
+        Array.set(obj, b, t);
+      } else {
+      throw new RuntimeException("Parameter isn't a array, not support type " + obj.getClass());
     }
   }
 }
