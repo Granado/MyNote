@@ -14,6 +14,10 @@ public class QuickSort {
     int[] topKs = topK(array, topK);
 
     System.out.println("topKs: " + ArrayUtils.printArray(topKs));
+
+    quickSort(array, 0, arrayLength - 1);
+
+    System.out.println("sorted: " + ArrayUtils.printArray(array));
   }
 
 
@@ -54,21 +58,11 @@ public class QuickSort {
     for (; j < r; j++) {
 
       if (array[j] < pivot) {
-        swap(array, i, j);
+        ArrayUtils.swap(array, i, j);
         i = i + 1;
       }
     }
-    swap(array, i, r);
+    ArrayUtils.swap(array, i, r);
     return i;
-  }
-
-  public static void swap(int[] array, int a, int b) {
-
-    if (a < array.length && b < array.length) {
-
-      int t = array[a];
-      array[a] = array[b];
-      array[b] = t;
-    }
   }
 }
