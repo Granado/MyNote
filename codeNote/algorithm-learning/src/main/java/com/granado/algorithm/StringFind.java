@@ -1,9 +1,5 @@
 package com.granado.algorithm;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.nio.charset.Charset;
-
 public class StringFind {
 
   public static boolean isAnyEmpty(char[]... c) {
@@ -36,6 +32,48 @@ public class StringFind {
     }
 
     return -1;
+  }
+
+  public static int pk(char[] text, char[] pattern) {
+
+    if (isAnyEmpty(text, pattern) || text.length < pattern.length) {
+      return -1;
+    }
+
+    int count = text.length - pattern.length + 1;
+    int patternHashCode = hashCode(pattern), textHashCode = 0, pLen = pattern.length;
+    for (int i = 0; i < count; i++) {
+
+      if (textHashCode == 0) {
+        textHashCode = hashCode(text, i, pattern.length);
+      } else {
+        textHashCode = (textHashCode - (int)Math.pow(31, (pLen - 1)) * text[i - 1]) * 31 + text[i + pLen - 1];
+      }
+
+      if (textHashCode == patternHashCode) {
+        return i;
+      }
+    }
+
+    return -1;
+  }
+
+  private static int hashCode(char[] text) {
+    return hashCode(text, 0, text.length);
+  }
+
+  private static int hashCode(char[] text, int start, int len) {
+
+    int h = 0;
+    if (isAnyEmpty(text) || start < 0 || start > len || len < 0) {
+      return h;
+    }
+
+    for (int i = start; i < text.length && i < len; i++) {
+      h = h * 31 + text[i];
+    }
+
+    return h;
   }
 
   public static int bm(char[] text, char[] pattern) {
@@ -77,16 +115,11 @@ public class StringFind {
     return map;
   }
 
-  public static void main(String[] args) throws Exception {
-    Field coder = String.class.getDeclaredField("coder");
-    coder.setAccessible(true);
+  public static void main(String[] args) {
 
+    String a = "abcdefg";
+    String b = "cde";
 
-    String a = "ssssssssbsssss发货";
-    String b = "bsssss";
-    System.out.println(coder.get(a));
-    System.out.println(coder.get(b));
-    System.out.println(a.indexOf(b));
-    //System.out.println(bm(a.toCharArray(), b.toCharArray()));
+    System.out.println(pk(a.toCharArray(), b.toCharArray()));
   }
 }
