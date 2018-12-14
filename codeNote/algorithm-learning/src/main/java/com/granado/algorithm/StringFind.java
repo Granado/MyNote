@@ -34,6 +34,8 @@ public class StringFind {
     return -1;
   }
 
+  // 根据字符串hash比较的一个算法
+  // 计算指数值得是否还能优化
   public static int pk(char[] text, char[] pattern) {
 
     if (isAnyEmpty(text, pattern) || text.length < pattern.length) {
@@ -47,11 +49,13 @@ public class StringFind {
       if (textHashCode == 0) {
         textHashCode = hashCode(text, i, pattern.length);
       } else {
-        textHashCode = (textHashCode - (int)Math.pow(31, (pLen - 1)) * text[i - 1]) * 31 + text[i + pLen - 1];
+        textHashCode = textHashCode * 31 - (int)Math.pow(31, pLen) * text[i - 1] + text[i + pLen - 1];
       }
 
       if (textHashCode == patternHashCode) {
-        return i;
+        int j = 0;
+        while (j < pLen && text[j + i] == pattern[j]) j++;
+        if (j == pLen) return i;
       }
     }
 
