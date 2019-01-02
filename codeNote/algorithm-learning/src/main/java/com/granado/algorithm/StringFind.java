@@ -119,11 +119,48 @@ public class StringFind {
     return map;
   }
 
+  // text, pattern 分别是主串和模式串；n, m 分别是主串和模式串的长度。
+  public static int kmp(char[] text, char[] pattern) {
+    int n = text.length, m = pattern.length;
+    int[] next = getNext(pattern);
+    int j = 0;
+    for (int i = 0; i < n; ++i) {
+      while (j > 0 && text[i] != pattern[j]) { // 一直找到 text[i] 和 pattern[j]
+        j = next[j - 1] + 1;
+      }
+      if (text[i] == pattern[j]) {
+        ++j;
+      }
+      if (j == m) { // 找到匹配模式串的了
+        return i - m + 1;
+      }
+    }
+    return -1;
+  }
+
+  // b 表示模式串，m 表示模式串的长度
+  private static int[] getNext(char[] b) {
+    int m = b.length, k = -1;
+    int[] next = new int[m];
+    next[0] = -1;
+    for (int i = 1; i < m; ++i) {
+      while (k != -1 && b[k + 1] != b[i]) {
+        k = next[k];
+      }
+      if (b[k + 1] == b[i]) {
+        ++k;
+      }
+      next[i] = k;
+    }
+    return next;
+  }
+
+
   public static void main(String[] args) {
 
-    String a = "abcdefg";
-    String b = "cde";
+    String a = "ababaeabacababacd";
+    String b = "ababacd";
 
-    System.out.println(pk(a.toCharArray(), b.toCharArray()));
+    System.out.println(kmp(a.toCharArray(), b.toCharArray()));
   }
 }
