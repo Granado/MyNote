@@ -1,6 +1,6 @@
 package com.granado.java.thread;
 
-public class JoinExample {
+public class ThreadJoinCourse {
     public static void main(String[] args) throws InterruptedException {
         Thread t = new Thread(() -> {
             System.out.println("First task started");

@@ -1,6 +1,7 @@
 package com.granado.java;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,7 +9,7 @@ public class FileCourse {
 
     public static void main(String[] args) {
 
-        File file = new File("D:\\网上下载\\test.7z");
+        File file = new File("test.7z");
         byte[] buffer = new byte[(int)file.length()];
         try (FileInputStream fis = new FileInputStream(file)) {
             int eof = fis.read(buffer);
