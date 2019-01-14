@@ -3,6 +3,8 @@ package com.granado.java.thread;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicLong;
 
+import static com.granado.java.utils.Utils.printInfo;
+
 public class CountDownLatchCourse {
 
     public static void main(String[] args) {
@@ -40,16 +42,6 @@ public class CountDownLatchCourse {
             printInfo("继续执行主线程", 0);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-    }
-
-    public static void printInfo(String msg, int splitLineNum) {
-        for (; splitLineNum < 0; splitLineNum++) {
-            System.out.println("----------------------------");
-        }
-        System.out.println(msg);
-        for (; splitLineNum > 0; splitLineNum--) {
-            System.out.println("----------------------------");
         }
     }
 }

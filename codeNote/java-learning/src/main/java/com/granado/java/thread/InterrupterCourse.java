@@ -20,14 +20,17 @@ import java.util.concurrent.locks.ReentrantLock;
  * java.nio 中的非阻塞 I/O 类也不支持可中断 I/O，但是同样可以通过关闭通道或者请求Selector上的唤醒来取消阻塞操作。
  * 类似地，尝试获取一个内部锁的操作（进入一个 synchronized 块）是不能被中断的，但是 ReentrantLock 支持可中断的获取模式。
  * <br/>
+ *<p>
  * 对于 synchronized 导致的线程 BLOCK 状态，线程会的中断标志会为 true ，但并不影响线程执行，也不会抛出什么异常。
  * 对于 ReentrantLock，线程在竞争锁的时候是进入 WAITING 状态，如果是通过 Lock() 使线程陷入 WAITING 状态，那么对该线程进行中断
  * 并不会发生任何事情，只会设置该线程的中断标志位。待到其拿到锁后，才可以根据中断标志位处理。如果是通过lockInterruptibly()方法
  * 使线程陷入等待状态，那么当其他线程对其中断时，会抛出InterruptedException异常。
- * <p>
+ *</p>
  * <br/>
+ * <p>
  * LockSupport 底层是使用 Unsafe 的 park 方法，会使线程进入 WAITING 或者 WAITING_TIMED 状态。但是对于用该方法陷入等待状态的线程，
  * 只会设置其中断标志位，不会抛出异常。
+ * </p>
  */
 public class InterrupterCourse {
 
