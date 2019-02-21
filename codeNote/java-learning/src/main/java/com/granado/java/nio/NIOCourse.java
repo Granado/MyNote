@@ -9,6 +9,7 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
 import static java.nio.channels.SelectionKey.OP_READ;
+import static java.nio.channels.SelectionKey.OP_WRITE;
 
 public class NIOCourse {
 
@@ -60,8 +61,7 @@ public class NIOCourse {
                     clientChannel.configureBlocking(false);
                     //在 OP_ACCEPT 到来时, 再将这个 Channel 的 OP_READ 注册到 Selector 中.
                     // 注意, 这里我们如果没有设置 OP_READ 的话, 即 interest set 仍然是 OP_CONNECT 的话, 那么 select 方法会一直直接返回.
-                    clientChannel.register(key.selector(), OP_READ, ByteBuffer.allocate(BUF_SIZE));
-                    clientChannel.write(ByteBuffer.wrap("test".getBytes()));
+                    clientChannel.register(key.selector(), OP_READ | OP_WRITE, ByteBuffer.allocate(BUF_SIZE));
                 }
 
                 if (key.isReadable()) {
@@ -71,7 +71,7 @@ public class NIOCourse {
                     if (bytesRead == -1) {
                         clientChannel.close();
                     } else if (bytesRead > 0) {
-                        key.interestOps(OP_READ | SelectionKey.OP_WRITE);
+                        key.interestOps(OP_READ | OP_WRITE);
                         System.out.println("Get data length: " + bytesRead);
                         System.out.println("Get data : " + new String(buf.array()));
                     }
