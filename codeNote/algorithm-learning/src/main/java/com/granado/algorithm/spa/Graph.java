@@ -84,12 +84,19 @@ public class Graph {
             count = 0;
         }
 
-        public boolean update(Vertex vertex) {
+        public VertexHeap(int size) {
 
-            return false;
+            vertices = new Vertex[size < DEFAULT_SIZE ? DEFAULT_SIZE : size];
+            count = 0;
         }
 
-        public Vertex poll(Vertex vertex) {
+        public boolean update(Vertex vertex) {
+
+            heapify();
+            return true;
+        }
+
+        public Vertex poll() {
 
             final Vertex[] es;
             final Vertex result;
@@ -153,7 +160,7 @@ public class Graph {
             es[k] = x;
         }
 
-        public boolean isEmpty(Vertex vertex) {
+        public boolean isEmpty() {
             if (vertices == null || vertices.length == 0 || count == 0) {
                 return true;
             }
@@ -177,7 +184,7 @@ public class Graph {
         for (int i = 0; i < this.v; ++i) {
             vertexes[i] = new Vertex(i, Integer.MAX_VALUE);
         }
-        PriorityQueue<Vertex> queue = new PriorityQueue(this.v);// 小顶堆
+        VertexHeap queue = new VertexHeap(this.v);// 小顶堆
         boolean[] inQueue = new boolean[this.v]; // 标记是否进入过队列
         vertexes[s].dist = 0;
         queue.add(vertexes[s]);
@@ -192,7 +199,7 @@ public class Graph {
                     nextVertex.dist = minVertex.dist + e.w;
                     predecessor[nextVertex.id] = minVertex.id;
                     if (inQueue[nextVertex.id] == true) {
-                        queue.offer(nextVertex); // 更新队列中的 dist 值
+                        queue.update(nextVertex); // 更新队列中的 dist 值
                     } else {
                         queue.add(nextVertex);
                         inQueue[nextVertex.id] = true;
