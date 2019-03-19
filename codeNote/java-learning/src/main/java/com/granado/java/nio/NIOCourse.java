@@ -15,7 +15,7 @@ public class NIOCourse {
 
     private static final int BUF_SIZE = 256;
 
-    private static final int TIMEOUT = 3000;
+    private static final int TIMEOUT = 30;
 
     private static final int SOCKET_PORT = 8080;
 
