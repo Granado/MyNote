@@ -16,17 +16,9 @@ public class EchoDataHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        if (msg instanceof ByteBuf) {
-            ByteBuf data = (ByteBuf) msg;
-            //拷贝一份数据
-            ByteBuf readCopy = data.copy();
-            int len =  readCopy.readableBytes();
-            byte[] arr = new byte[len];
-            readCopy.getBytes(0, arr);
-            LOG.info("read data:\n {}", new String(arr));
-            ctx.write(arr);
-            ctx.flush();
-        }
+        ByteBuf byteBuf = (ByteBuf) msg;
+        ctx.write(msg);
+        ctx.flush();
     }
 
     @Override
