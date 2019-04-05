@@ -23,4 +23,5 @@ public class ThreadStateCourse {
     // 初始状态为 NEW ，中止状态为 TERMINATED
     // BLOCKED 和 WAITING 的区别在于 BLOCKED 是等待锁，WAITING 是线程间都已经拿到过锁了，
     // 但是在执行的时候通过 wait() 方法放弃时间片，等待其他线程执行。
+    // Java中，IO阻塞时，线程处于 Runable 状态，Runable 状态包含了操作系统 Ready, Running, Waiting 三个状态
 }
