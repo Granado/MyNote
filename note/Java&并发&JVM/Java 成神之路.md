@@ -174,10 +174,10 @@ Thread.State.NEW; // new Thread(() -> {...})
 Thread.State.RUNNABLE; // new Thread(() -> {...}).start();
 
 // A thread that is blocked waiting for a monitor lock is in this state.
-Thread.State.BLOCKED; // reentrantLock.lock(); synchronized (obj) {...}
+Thread.State.BLOCKED; // synchronized (obj) {...}
 
 // A thread that is waiting indefinitely for another thread to perform a particular action is in this state.
-Thread.State.WAITING; // obj.wait(); condition.await();
+Thread.State.WAITING; // obj.wait(); condition.await(); reentrantLock.lock(); 
 
 // A thread that is waiting for another thread to perform an action for up to a specified waiting time is in this state.
 Thread.State.TIMED_WAITING; // obj.wait(time); condition.await(time)
