@@ -7,9 +7,9 @@ import java.nio.channels.FileChannel;
 
 public class FileCopyCourse {
 
-    private static final String SOURCE_FILE_NAME = "D:\\source.txt";
+    private static final String SOURCE_FILE_NAME = "/Users/gyang1/source.txt";
 
-    private static final String TARGET_FILE_NAME = "D:\\target.txt";
+    private static final String TARGET_FILE_NAME = "/Users/gyang1/target.txt";
 
     // 大致4GB大小的文件行数
     private static final int FILE_LINE_NUM = 400552583;
@@ -47,13 +47,17 @@ public class FileCopyCourse {
         RandomAccessFile targetFileAccess = new RandomAccessFile(targetFile, "rw");
 
         // 使用 transferTo 方法，一次最多能写入 Integer.MAX_VALUE 个单位。
-        long blockSize = Integer.MAX_VALUE;
+        /*long blockSize = Integer.MAX_VALUE;
         long blockCount = sourceFile.length() / blockSize;
         blockCount = blockCount + (sourceFile.length() % blockSize == 0 ? 0 : 1);
 
         for (long i = 0; i < blockCount; i++) {
             long position = i * blockSize;
             channel.transferTo(position, blockSize, targetFileAccess.getChannel());
+        }*/
+
+        for (long l = 0; l != sourceFile.length();) {
+            l += channel.transferTo(l, Integer.MAX_VALUE, targetFileAccess.getChannel());
         }
 
         channel.close();
