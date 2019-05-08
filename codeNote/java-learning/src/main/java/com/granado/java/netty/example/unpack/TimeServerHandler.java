@@ -1,4 +1,4 @@
-package com.granado.java.netty.example;
+package com.granado.java.netty.example.unpack;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -25,10 +25,8 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext context, Object msg) throws Exception {
-        ByteBuf buf = (ByteBuf) msg;
-        byte[] req = new byte[buf.readableBytes()];
-        buf.readBytes(req);
-        String body = new String(req, UTF8).substring(0, req.length - LINE_SEPARATOR.length());
+
+        String body = (String) msg;
 
         print(body);
 

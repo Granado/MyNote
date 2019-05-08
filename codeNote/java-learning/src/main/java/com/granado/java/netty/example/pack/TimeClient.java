@@ -1,4 +1,4 @@
-package com.granado.java.netty.example;
+package com.granado.java.netty.example.pack;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;

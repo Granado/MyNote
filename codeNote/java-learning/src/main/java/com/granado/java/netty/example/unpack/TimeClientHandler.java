@@ -1,4 +1,4 @@
-package com.granado.java.netty.example;
+package com.granado.java.netty.example.unpack;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -18,7 +18,7 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
     private static final AtomicIntegerFieldUpdater counterUpdater = AtomicIntegerFieldUpdater.newUpdater(TimeClientHandler.class,
       "counter");
 
-    private byte[] req = "QUERY TIME ORDER".getBytes();
+    private byte[] req = "QUERY TIME ORDER\r\n".getBytes();
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -32,10 +32,8 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        ByteBuf buf = (ByteBuf) msg;
-        byte[] req = new byte[buf.readableBytes()];
-        buf.readBytes(req);
-        String body = new String(req, "UTF8");
+
+        String body = (String) msg;
         System.out.println("Now is: " + body + ", counter is: " + counterUpdater.addAndGet(this, 1));
     }
 
