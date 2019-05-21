@@ -9,6 +9,11 @@ package com.granado.leetcode;
  *           2、第 n+1 个字符在 S(n) 中出现过，且位置为 k， 那么新序列为 S(k...n+1)，maxLength = max(maxLength, S(k...n+1))
  *           遍历每一个字符，重复如上步骤得到最大值。问题在于在已有序列中查找新字符是否存在，如下第一种方法采用循环查找，最坏的情况是 o(n^2)
  *           第二个方法采用 map 找
+ *
+ * 其他相关类似问题：
+ *     Longest Substring with At Most Two Distinct Characters
+ *     Longest Substring with At Most K Distinct Characters
+ *     Subarrays with K Different Integers
  * */
 public class LengthOfLongestSubstring {
 
