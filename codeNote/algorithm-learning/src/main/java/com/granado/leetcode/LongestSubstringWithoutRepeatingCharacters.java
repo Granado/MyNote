@@ -15,7 +15,7 @@ package com.granado.leetcode;
  *     Longest Substring with At Most K Distinct Characters
  *     Subarrays with K Different Integers
  * */
-public class LengthOfLongestSubstring {
+public class LongestSubstringWithoutRepeatingCharacters {
 
     public static void main(String[] args) {
         final String source = "abcdefg";
