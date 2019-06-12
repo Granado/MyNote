@@ -59,7 +59,7 @@ public class SQLUtils {
             dataSource.setJdbcUrl(url);
             dataSource.setUser(user);
             dataSource.setPassword(password);
-            dataSource.setInitialPoolSize(20);
+            dataSource.setInitialPoolSize(50);
             dataSource.setMaxPoolSize(100);
             dataSource.setDriverClass("com.mysql.jdbc.Driver");
             return dataSource;

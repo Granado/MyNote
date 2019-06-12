@@ -1,14 +1,26 @@
 package com.granado.java.mysql;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Streams;
 import com.granado.java.utils.SQLUtils;
 import io.netty.buffer.Unpooled;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * @Author: Granado
@@ -16,7 +28,7 @@ import java.util.concurrent.Executors;
  */
 public class Seckill {
 
-    private static final String SQL_DESCEND_INVENTORY = "update inventory set quantity = quantity - #{number} where id = #{id} and quantity > 0";
+    private static final String SQL_DESCEND_INVENTORY = "update inventory set quantity = quantity - #{number} where id = #{id} and quantity >= #{number}";
 
     private static final Random RANDOM = new Random();
 
@@ -26,24 +38,45 @@ public class Seckill {
 
     private static final String PASSWORD = "zylzysl1994";
 
-    public static void main(String[] args) {
+    private static final AtomicInteger BUY_COUNT = new AtomicInteger(0);
+
+    public static void main(String[] args) throws Exception {
 
         DataSource dataSource = SQLUtils.createDatasource(URL, USER, PASSWORD);
 
-        Runnable runnable = () -> {
-            int goodsNumber = 1;//RANDOM.nextInt() & (0x0f);
-            System.out.println("i will buy " + goodsNumber + " goods, " + threadInfo());
+        Callable<Integer> runnable = () -> {
+            int goodsNumber = RANDOM.nextInt() & (0xff);
+            //System.out.println("i will buy " + goodsNumber + " goods, " + threadInfo());
             String sql = SQLUtils.constructSQL(SQL_DESCEND_INVENTORY, Map.of("number", goodsNumber, "id", 1));
             if (SQLUtils.executeUpdate(sql, dataSource)) {
+                BUY_COUNT.addAndGet(goodsNumber);
                 System.out.println("i have buy " + goodsNumber + " goods, " + threadInfo());
+                return goodsNumber;
             }
+            return 0;
         };
 
         ExecutorService executorService = Executors.newCachedThreadPool();
-        for (int i = 0; i < 2455; i++) {
-            executorService.execute(runnable);
+        List<Callable<Integer>> callables = new ArrayList<>(1000);
+        for (int i = 0; i < 1000; i++) {
+            callables.add(runnable);
         }
+
+        List<Future<Integer>> results = executorService.invokeAll(callables);
         executorService.shutdown();
+        int count = 0;
+        while (!results.isEmpty()) {
+            Iterator<Future<Integer>> iterator = results.iterator();
+            while (iterator.hasNext()) {
+                Future<Integer> result = iterator.next();
+                if (result.isDone()) {
+                    count += result.get();
+                    iterator.remove();
+                }
+            }
+        }
+
+        System.out.println(count);
     }
 
     public static String threadInfo() {
