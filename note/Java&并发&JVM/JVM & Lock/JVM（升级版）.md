@@ -69,33 +69,3 @@ JVM 总体上是由类装载子系统（ClassLoader）、运行时数据区、�
 **后记**
 
 读到这里，小编希望能够对大家温习基础知识起到一定的帮助，特别是从事 Java 开发工作时间并不长的朋友希望本文能对你们有所促进，因为根据作者的经验，有时候很多从事 Java 开发工作好几年的同学，都会对这些知识点产生模糊的认识，一方面是目前各类 Java 开源工具比较完备，另一方面是很多人从事的是业务研发工作，时间久了难免会对基础知识有所遗忘。在上面的部分中还有一块垃圾回收的知识点没有总结到，基于篇幅的原因后面再单独给大家总结！谢谢你们的关注~
-
-<section style="margin: 10px 0% 30px;opacity: 0.8;box-sizing: border-box;">
-
-<section>
-
-<section class="">
-
-<section>
-
-<section>
-
-<section class="" data-style-type="5" data-tools="新媒体排版" data-id="979392">
-
-—————END—————
-
-如果觉得小哥在认真写文章，可以关注下公众号，支持下哦![](https://res.wx.qq.com/mpres/htmledition/images/icon/common/emotion_panel/smiley/smiley_0.png)
-
-![](https://mmbiz.qpic.cn/mmbiz_jpg/l89kosVuton5KOpE65Uoh7kf3PZ9yRbtyBMAuSscgOFicWLHWWO8KBIibf8WeI7lqvrbr9SOs8wnVteDUwLg2YicA/640?wx_fmt=jpeg)
-
-</section>
-
-</section>
-
-</section>
-
-</section>
-
-</section>
-
-</section>
