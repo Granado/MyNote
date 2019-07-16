@@ -1,6 +1,7 @@
 package com.granado.leetcode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class RegularExpressionMatching {
@@ -55,7 +56,7 @@ public class RegularExpressionMatching {
         }
     }
 
-    private Digraph constructNFA(String pattern) {
+    private static Digraph constructNFA(String pattern) {
 
         if (pattern == null) {
             return null;
@@ -84,9 +85,82 @@ public class RegularExpressionMatching {
         return digraph;
     }
 
-    public boolean isMatch(String s, String p) {
+    public static boolean isMatch(String s, String p) {
 
         Digraph digraph = constructNFA(p);
+        List<Integer> pc = new LinkedList<>();
+        DirectedDFS dfs = new DirectedDFS(digraph, 0);
+        for (int v = 0; v < digraph.getVertex(); v++) {
+            if (dfs.isMarked(v)) {
+                pc.add(v);
+            }
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+
+            List<Integer> match = new LinkedList<>();
+            for (int v : pc) {
+                if ( v < p.length()) {
+                    if (p.charAt(v) == s.charAt(i) || p.charAt(v) == '.') {
+                        match.add(v + 1);
+                    }
+                }
+            }
+            pc = new LinkedList<>();
+            dfs = new DirectedDFS(digraph, match);
+            for (int v = 0; v < digraph.getVertex(); v++) {
+                if (dfs.isMarked(v)) {
+                    pc.add(v);
+                }
+            }
+        }
+
+        for (int v : pc) {
+            if (v == p.length()) {
+                return true;
+            }
+        }
+
         return false;
+    }
+
+    // 记录从给定的起点端点能到达的端点
+    public static final class DirectedDFS {
+
+        private boolean marked[];
+
+        public DirectedDFS(Digraph g, int startVertex) {
+
+            marked = new boolean[g.getVertex()];
+            dfs(g, startVertex);
+        }
+
+        public DirectedDFS(Digraph g, Iterable<Integer> source) {
+
+            marked = new boolean[g.getVertex()];
+            for (Integer each : source) {
+                if (!marked[each]) {
+                    dfs(g, each);
+                }
+            }
+        }
+
+        private void dfs(Digraph g, int s) {
+            marked[s] = true;
+            for (int each : g.adj(s)) {
+                if (!marked[each]) {
+                    dfs(g, each);
+                }
+            }
+        }
+
+        public boolean isMarked(int v) {
+            return marked[v];
+        }
+    }
+
+    public static void main(String[] args) {
+        String text = "aab", p = "c*a*b";
+        System.out.println(isMatch(text, p));
     }
 }
