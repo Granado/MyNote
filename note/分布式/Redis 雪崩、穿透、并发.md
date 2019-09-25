@@ -97,21 +97,3 @@
 [Redis 为什么是单线程，高并发快的 3 大原因详解](https://zhuanlan.zhihu.com/p/58038188)
 
 [Redis 面试题目 49 道附答案](https://zhuanlan.zhihu.com/p/58333436)
-
-![](https://pic3.zhimg.com/v2-2be95a2a184cdef9a78c52661d34c36a_b.png)![](https://pic3.zhimg.com/80/v2-2be95a2a184cdef9a78c52661d34c36a_hd.png)
-写下你的评论...
-
-写得好
-
-感谢点赞、评论支持~
-
-你们有什么专门的培训班么？
-
-优知学院有在线培训课程，主要针对 Java 面试通关、进阶 Java 架构师，感谢关注支持，更多技术内容查看往期文章~
-
-还不错
-
-很好的一篇文章
-
-![](https://pic3.zhimg.com/v2-cfc14c7293afd962ecbd1dc31dafd002_r.gif)
-![](https://pic3.zhimg.com/v2-cb8443f07a41298e45191cef11b90fd2_r.gif)
