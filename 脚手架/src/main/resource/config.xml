@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTDSQL Map Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 引入外部资源配置文件 -->
+    <properties resource="jdbc.properties" />
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+    <!-- 配置环境，制定数据库连接信息 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}" />
+                <property name="url" value="${jdbc.url}" />
+                <property name="username" value="${jdbc.user}" />
+                <property name="password" value="${jdbc.password}" />
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!-- <mapper resource="live/foreach/novel/dao/mapper/*.xml"/> -->
+        <!-- Mapper扫描包，必须同目录同名称下 -->
+        <package name="com.granado.dao" />
+        <!-- <package name="live/foreach/novel/dao/mapper"/> -->
+    </mappers>
+
+</configuration>
