@@ -1,6 +1,7 @@
 package com.granado.java.utils;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -55,13 +56,16 @@ public class SQLUtils {
 
     public static DataSource createDatasource(String url, String user, String password) {
         try {
-            ComboPooledDataSource dataSource = new ComboPooledDataSource();
-            dataSource.setJdbcUrl(url);
-            dataSource.setUser(user);
-            dataSource.setPassword(password);
-            dataSource.setInitialPoolSize(50);
-            dataSource.setMaxPoolSize(100);
-            dataSource.setDriverClass("com.mysql.jdbc.Driver");
+            HikariConfig config = new HikariConfig();
+            config.setJdbcUrl(url);
+            config.setUsername(user);
+            config.setPassword(password);
+            config.addDataSourceProperty("cachePrepStmts", "true");
+            config.addDataSourceProperty("prepStmtCacheSize", "250");
+            config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+            config.setMaximumPoolSize(100);
+            config.setDriverClassName("com.mysql.jdbc.Driver");
+            HikariDataSource dataSource = new HikariDataSource(config);
             return dataSource;
         } catch (Exception e) {
             e.printStackTrace();
