@@ -160,7 +160,7 @@ public class RegularExpressionMatching {
     }
 
     public static void main(String[] args) {
-        String text = "aab", p = "c*a*b";
+        String text = "aab", p = "a*b";
         System.out.println(isMatch(text, p));
     }
 }

@@ -12,11 +12,19 @@ public class FileCopyCourse {
     private static final String TARGET_FILE_NAME = "/Users/gyang1/target.txt";
 
     // 大致4GB大小的文件行数
-    private static final int FILE_LINE_NUM = 400552583;
+    private static final int FILE_LINE_NUM = 1024 * 1024;
 
     public static void main(String[] args) throws Exception {
 
-        copyFile();
+        FileWriter fileWriter = new FileWriter("/Users/user/Downloads/file.txt");
+        for (int i = 0; i < 8326074; i++) {
+            fileWriter.write(String.valueOf(i));
+            fileWriter.write("\r\n");
+        }
+        fileWriter.flush();
+        fileWriter.close();
+
+        //System.out.printf("file size is: %d", calculateFileSize(FILE_LINE_NUM));
     }
 
     private static void copyFile() throws Exception {
