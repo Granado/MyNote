@@ -3,8 +3,6 @@ package com.granado.java.thread;
 import cn.hutool.core.date.StopWatch;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * @Author: Yang Songlin
@@ -31,12 +29,7 @@ public class CompletableFutureCourse {
     private static void sleep(long millis) {
         try {
             Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            return ;
+        } catch (InterruptedException ignored) {
         }
-    }
-
-    public static void main(String[] args) {
-
     }
 }

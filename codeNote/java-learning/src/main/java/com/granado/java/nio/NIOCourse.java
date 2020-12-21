@@ -1,5 +1,7 @@
 package com.granado.java.nio;
 
+import sun.nio.ch.PollSelectorProvider;
+
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
@@ -24,7 +26,7 @@ public class NIOCourse {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
 
         // 打开 Selector
-        Selector selector = Selector.open();
+        Selector selector = PollSelectorProvider.provider().openSelector();
 
         // 服务端 Socket 监听8080端口, 并配置为非阻塞模式
         serverSocketChannel.socket().bind(new InetSocketAddress(SOCKET_PORT));

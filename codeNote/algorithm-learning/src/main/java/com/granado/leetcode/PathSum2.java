@@ -58,12 +58,12 @@ public class PathSum2 {
         List<List<Integer>> r = new ArrayList<>(size);
 
         if (left != null && !left.isEmpty()) {
-            left.stream().forEach(eachList -> eachList.add(0, rootVal));
+            left.forEach(eachList -> eachList.add(0, rootVal));
             r.addAll(left);
         }
 
         if (right != null && !right.isEmpty()) {
-            right.stream().forEach(eachList -> eachList.add(0, rootVal));
+            right.forEach(eachList -> eachList.add(0, rootVal));
             r.addAll(right);
         }
 
