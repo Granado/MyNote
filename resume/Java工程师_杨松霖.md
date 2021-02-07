@@ -10,13 +10,29 @@
 
 ## 专业能力
 - 熟悉常用算法和数据结构，OOP。
-- 熟悉Java，NIO，多线程编程，Spring Boot， Dubbo。
-- 熟悉MySQL，Redis，RabbitMQ，ElasticSearch，Zookepeer等中间件。
+- 熟悉Java，NIO，多线程编程，Spring Boot。
+- 熟悉MySQL，Redis，RabbitMQ，ElasticSearch等中间件。
 - 熟悉分布式，微服务，分布式锁和分布式事务。
 
 ## 工作经历
 
-### 成都嗨学梅里教育（至今）
+### 币安（全球最大的数字货币交易平台之一）（至今）
+
+#### 1、名单服务
+
+- 项目背景：该项目负责统一的黑白灰名单管理，支持亿级以上的名单数据，5000+以上的QPS
+- 项目角色：独立负责的整个服务开发优化和对接推广。
+- 项目技术：Spring Boot，MongoDB，Redis，MySQL，Apollo，feign client，eureka，UIDGenerator，RoaringBitMap。
+
+#### 2、Admin管理中台
+
+- 项目背景：该项目是整个后台管理系统的中台，功能多，负责给600+的功能页面提供服务。
+
+- 项目角色：与同组同事负责该项目的基础公共功能开发和维护。
+
+- 项目技术：Spring Boot，SAML认证，Redis，Apollo，feign client，eureka。
+
+### 嗨学网（2019-2020）
 
 #### 1、C端登录认证
 - 项目背景：该项目负责统一C端用户的统一认证和登录
@@ -32,7 +48,7 @@
 
 - 项目技术：Spring Boot，Dubbo，MySQL。
 
-### 上海点融信息科技有限责任公司-点融网（2017.06～2018.12）
+### 点融网（2017～2019）
 
 #### 1、数据聚合平台
 - 项目背景：该项目负责解耦各个系统间数据的获取
@@ -47,14 +63,14 @@
 - 项目角色：负责了该项目的部分功能开发，项目的维护和对接。
 - 项目技术：Spring Boot，MySQL，ElasticSearch，Quartz，Redis。
 
-### 成都云遥互动科技有限公司-抹茶美妆（2016.06～2017.06）
+### 成都云遥互动科技有限公司-抹茶美妆（2016～2017）
 
 #### 1、抹茶美妆小程序版：
 - 项目背景：实现抹茶美妆APP的小程序版，完成主要得Feed页，关注页和个人中心。
 - 项目角色：负责了关注和Feed页的后端功能实现。
 - 项目技术：rose、spring、jade、mq、redis、mysql，json，分表。
 
-#### 3、新浪微博的爬虫：
+#### 2、新浪微博的爬虫：
 - 项目背景：由于MCN项目的需求，需要爬取微博信息，分析具有潜力的网红以便于签约培养。
 
 - 项目技术：Webmagic, Mybatis, Mysql。
