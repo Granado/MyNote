@@ -16,7 +16,7 @@ public class JavaCourse {
         String t = getT();
 
 
-        public Base () {
+        public Base() {
             System.out.println("this is Base constructor");
         }
 
@@ -46,7 +46,7 @@ public class JavaCourse {
         String t = getT();
 
 
-        public Son () {
+        public Son() {
             super();
             System.out.println("this is Son constructor");
         }
