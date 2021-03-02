@@ -11,7 +11,7 @@
 ## 专业能力
 - 熟悉常用算法和数据结构，OOP。
 - 熟悉Java，NIO，多线程编程，Spring Boot。
-- 熟悉MySQL，Redis，RabbitMQ，ElasticSearch等中间件。
+- 熟悉MySQL，Mongodb，Redis，RabbitMQ，ElasticSearch等中间件。
 - 熟悉分布式，微服务，分布式锁和分布式事务。
 
 ## 工作经历
@@ -20,8 +20,8 @@
 
 #### 1、多维度名单服务
 
-- 项目背景：该项目负责统一的黑白灰名单管理，支持亿级以上的名单数据，5000+以上的QPS
-- 项目角色：独立负责的整个服务开发优化和对接推广。
+- 项目背景：该项目负责统一的黑白灰名单管理，支持亿级以上的名单数据，5000+以上的QPS，p99 5ms内
+- 项目角色：独立负责的整个业务服务开发，优化性能提升和对接推广。
 - 项目技术：Spring Boot，MongoDB，Redis，MySQL，Apollo，feign client，eureka，UIDGenerator，RoaringBitMap。
 
 #### 2、Admin管理中台
