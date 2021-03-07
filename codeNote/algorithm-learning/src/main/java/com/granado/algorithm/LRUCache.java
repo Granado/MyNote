@@ -1,5 +1,8 @@
 package com.granado.algorithm;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @Author: Yang Songlin
  * @Date: 2020/12/18 5:15 下午
@@ -10,18 +13,29 @@ public class LRUCache<K, V> {
 
     private Node<K, V> tail = null;
 
+    private Map<K, Node<K, V>> indices = new HashMap<>();
+
+    private final int length;
+
+    private int index = 0;
+
     static class Node<K, V> {
         Node<K, V> prev;
         Node<K, V> next;
         V value;
         K key;
 
-        public Node() {}
+        public Node() {
+        }
 
         public Node(K key, V data) {
             this.value = data;
             this.key = key;
         }
+    }
+
+    public LRUCache(int length) {
+        this.length = length;
     }
 
     public Node<K, V> get(K key) {
@@ -55,6 +69,7 @@ public class LRUCache<K, V> {
         }
         Node<K, V> f = findNode(key);
         if (f == null) {
+            index ++;
             f = tail;
             Node<K, V> newNode = new Node<>(key, value);
             tail = newNode;

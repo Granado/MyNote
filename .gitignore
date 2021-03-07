@@ -10,3 +10,5 @@ codeNote/java-learning/out/
 codeNote/gradle/
 codeNote/gradlew
 codeNote/gradlew.bat
+.gradle/
+.idea/

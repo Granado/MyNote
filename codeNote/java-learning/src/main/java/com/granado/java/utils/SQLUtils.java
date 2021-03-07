@@ -16,8 +16,8 @@ import java.util.Map;
 public class SQLUtils {
 
     public static boolean executeUpdate(String sql, DataSource dataSource) {
-        try(Connection connection = dataSource.getConnection();
-            Statement statement = connection.createStatement()){
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement()) {
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             connection.setAutoCommit(false);
             if (statement.executeUpdate(sql) == 0) {
@@ -38,7 +38,7 @@ public class SQLUtils {
 
     public static String constructSQL(String sql, Map<String, Object> values) {
         if (sql == null || sql.length() == 0
-          || values == null || values.isEmpty()) {
+                || values == null || values.isEmpty()) {
             return sql;
         }
 
