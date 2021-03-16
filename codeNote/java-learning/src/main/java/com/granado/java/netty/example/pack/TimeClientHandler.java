@@ -20,10 +20,10 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 
     private byte[] req = "QUERY TIME ORDER\r\n".getBytes();
 
-    // 粘包原因有 3，
-    // 1：包的大小大于了 Socket 的发送缓冲区大小。
-    // 2：进行了 MSS 分包。
-    // 3：网络层的包大小大于了链路层的MTU，进行了 IP 分片。
+    // 粘包原因:
+    // 1：包的大小大于了 Socket 的发送缓冲区大小
+    // 2：进行了 MSS 分包
+    // 3：网络层的包大小大于了链路层的MTU，进行了 IP 分片
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         ByteBuf message = null;
